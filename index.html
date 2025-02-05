@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9"> <!-- Kisebb alapértelmezett skálázás -->
+    <title>0xByte_Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif; /* Módosított betűtípus */
+            overflow: hidden;
+            color: white; /* Fehér szín */
+            font-size: 16px; /* Az alap betűméret beállítása */
+        }
+
+        /* Videó háttér homályosítással */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* A videó a háttérben marad */
+            filter: blur(1px); /* A homályosítás mértéke */
+        }
+
+        /* További stílusok */
+        header {
+            background-color: rgba(17, 17, 17, 0.9); /* Átlátszó sötét háttér */
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10; /* A fejléc a videó felett legyen */
+        }
+        header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #fff;
+        }
+        header h1 {
+            font-size: 1.2em; /* A fejléc kisebb méret */
+            font-weight: 600;
+            color: #f1f1f1;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        header h2 {
+            font-size: 0.9em; /* A kisebb címekhez is csökkentett betűméret */
+            font-weight: 300;
+            color: #ffcc00;
+            margin-left: 12px;
+        }
+
+        /* Navigáció */
+        nav {
+            background-color: #111;
+            padding: 0;
+            margin-top: 3px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid #444; /* A navigáció elválasztása a fejléctől */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* A menü a jobb oldalra kerül */
+        }
+
+        nav li {
+            position: relative;
+            padding: 10px 18px; /* Kisebb padding a menüpontokhoz */
+            font-size: 1em; /* Kisebb betűméret a menüben */
+            border-left: 1px solid #444; /* Véletlenül elválasztja a menüpontokat */
+            cursor: pointer;
+        }
+
+        nav li:first-child {
+            border-left: none; /* Az első elem ne legyen elválasztva */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Alap váz szerkezet legördülő menükhöz */
+        .submenu {
+            display: none;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            border: 1px solid #444;
+            position: absolute;
+            left: 0;
+            top: 100%; /* A menü közvetlenül a kattintott elem alatt jelenik meg */
+            width: 180px; /* Menüpont szélessége */
+            z-index: 1;
+        }
+
+        .submenu li {
+            padding: 8px 14px; /* Kisebb padding */
+        }
+
+        .submenu a {
+            color: white;
+        }
+
+        /* A legördülő menü viselkedése */
+        nav li.active .submenu {
+            display: block; /* Ha az elem aktív, akkor a legördülő menü megjelenik */
+        }
+
+        /* A fő tartalom méretének csökkentése */
+        section {
+            padding: 16px;
+        }
+
+        section h1 {
+            font-size: 1.5em; /* A fő cím kisebb */
+        }
+
+        section p {
+            font-size: 0.9em; /* A bekezdések szövege kisebb */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Videó háttér -->
+    <video class="video-background" autoplay muted loop>
+        <source src="bg_welcome.webm" type="video/mp4">
+        Az Ön böngészője nem támogatja a videókat.
+    </video>
+
+    <!-- Fejléc -->
+    <header>
+        <img src="kor_logo.png" alt="logó">
+        <h1>Ethical Hacking</h1>
+        <h2>Powered by 0xByte</h2>
+    </header>
+
+    <!-- Navigációs menü -->
+    <nav>
+        <ul>
+            <li><a href="#">Rólam</a></li>
+
+            <!-- Hacker Eszközök legördülő menü -->
+            <li onclick="toggleSubmenu(this)">
+                <a href="#">Hacker Eszközök</a>
+                <ul class="submenu">
+                    <li><a href="https://nmap.org/">Nmap</a></li>
+                    <li><a href="#">Gobuster</a></li>
+                    <li><a href="#">Metasploit</a></li>
+                    <li><a href="#">Hydra</a></li>
+                    <li><a href="#">Hashcat</a></li>
+                </ul>
+            </li>
+
+            <!-- Tanagyagok legördülő menü -->
+            <li onclick="toggleSubmenu(this)">
+                <a href="#">Tanagyagok</a>
+                <ul class="submenu">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+            </li>
+
+            <!-- Programozási Nyelvek legördülő menü -->
+            <li onclick="toggleSubmenu(this)">
+                <a href="#">Programozási Nyelvek</a>
+                <ul class="submenu">
+                    <li><a href="#">Python</a></li>
+                    <li><a href="#">Java</a></li>
+                    <li><a href="#">Java_Script</a></li>
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">Ruby</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Weboldal tartalom -->
+    <section style="color: white; padding: 20px 130px;">
+        <h1 style="text-align: center;">Etikus hackerré válás útján.</h1>
+        <p> Ezen az oldalon megismerheted az én utamat a kiberbiztonság világában és az etikus hacking területén. </p>
+    </section>
+
+    <script>
+        // JavaScript a legördülő menük kezelésére
+        function toggleSubmenu(element) {
+            // Ellenőrzi, hogy a kattintott menü már aktív-e
+            if (element.classList.contains('active')) {
+                element.classList.remove('active'); // Ha igen, eltávolítja az aktív osztályt
+            } else {
+                // Ha nem, az összes menüpontot bezárja és csak az aktuális menüpontot nyitja meg
+                var allMenus = document.querySelectorAll('nav li');
+                allMenus.forEach(function(menu) {
+                    menu.classList.remove('active');
+                });
+                element.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
