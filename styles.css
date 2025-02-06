@@ -1,0 +1,169 @@
+/* Alap stílusok */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+    color: white;
+    font-size: 16px;
+    position: relative;
+}
+
+/* Háttér */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('b.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(20px);
+    z-index: -1;
+}
+
+/* Fejléc */
+header {
+    background-color: rgba(17, 17, 17, 0.9); 
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10;
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 2px solid #fff;
+}
+
+header h1 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #f1f1f1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+header h2 {
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #ffcc00;
+    margin-left: 5px;
+}
+
+.separator {
+    width: 3px;
+    height: 40px;
+    background-color: white;
+    margin: 0 5px;
+}
+
+/* Navigáció */
+nav {
+    background-color: rgba(17, 17, 17, 0.9);
+    padding: 0;
+    margin-top: 3px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid #444;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav li {
+    position: relative;
+    padding: 10px 18px;
+    font-size: 1em;
+    border-left: 1px solid #444;
+    cursor: pointer;
+}
+
+nav li:first-child {
+    border-left: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.submenu {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #222;
+    border: 1px solid #444;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 180px;
+    z-index: 1;
+}
+
+.submenu li {
+    padding: 8px 14px;
+}
+
+.submenu a {
+    color: white;
+}
+
+nav li.active .submenu {
+    display: block;
+}
+
+/* Nyelvválasztás gomb */
+.language-toggle {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    background-color: white;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+/* Gomb stílus */
+.toggle-button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 15px;
+    background-color: white;
+    border: 2px solid #444;
+    background-image: url('light.png');
+    background-size: cover;
+}
+
+.toggle-button.dark {
+    background-image: url('dark.png');
+}
+
+/* Világos mód */
+body.light-mode {
+    background-color: #fff;
+    color: black;
+}
+
+body.light-mode .background-container {
+    filter: blur(500px);
+}
+
+body.light-mode p {
+    font-weight: bold;
+}
