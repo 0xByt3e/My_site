@@ -2,42 +2,46 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9"> <!-- Kisebb alapértelmezett skálázás -->
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
     <title>0xByte_Labs</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
+        /* Alap stílusok */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Orbitron', sans-serif; /* Módosított betűtípus */
+            font-family: 'Orbitron', sans-serif;
             overflow: hidden;
-            color: white; /* Fehér szín */
-            font-size: 16px; /* Az alap betűméret beállítása */
+            color: white;
+            font-size: 16px;
+            position: relative;
         }
 
-        /* Videó háttér homályosítással */
-        .video-background {
+        /* Háttér */
+        .background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            z-index: -1; /* A videó a háttérben marad */
-            filter: blur(1px); /* A homályosítás mértéke */
+            background: url('b.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(20px);
+            z-index: -1;
         }
 
-        /* További stílusok */
+        /* Fejléc */
         header {
-            background-color: rgba(17, 17, 17, 0.9); /* Átlátszó sötét háttér */
+            background-color: rgba(17, 17, 17, 0.9); 
             padding: 14px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             position: relative;
-            z-index: 10; /* A fejléc a videó felett legyen */
+            z-index: 10;
         }
+
         header img {
             width: 40px;
             height: 40px;
@@ -45,27 +49,37 @@
             margin-right: 12px;
             border: 2px solid #fff;
         }
+
         header h1 {
-            font-size: 1.2em; /* A fejléc kisebb méret */
+            font-size: 1.2em;
             font-weight: 600;
             color: #f1f1f1;
             letter-spacing: 1px;
             text-transform: uppercase;
+            margin-right: 5px;
         }
+
         header h2 {
-            font-size: 0.9em; /* A kisebb címekhez is csökkentett betűméret */
+            font-size: 0.9em;
             font-weight: 300;
             color: #ffcc00;
-            margin-left: 12px;
+            margin-left: 5px;
+        }
+
+        .separator {
+            width: 3px;
+            height: 40px;
+            background-color: white;
+            margin: 0 5px;
         }
 
         /* Navigáció */
         nav {
-            background-color: #111;
+            background-color: rgba(17, 17, 17, 0.9);
             padding: 0;
             margin-top: 3px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border-top: 3px solid #444; /* A navigáció elválasztása a fejléctől */
+            border-top: 3px solid #444;
         }
 
         nav ul {
@@ -73,19 +87,19 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: flex-end; /* A menü a jobb oldalra kerül */
+            justify-content: flex-end;
         }
 
         nav li {
             position: relative;
-            padding: 10px 18px; /* Kisebb padding a menüpontokhoz */
-            font-size: 1em; /* Kisebb betűméret a menüben */
-            border-left: 1px solid #444; /* Véletlenül elválasztja a menüpontokat */
+            padding: 10px 18px;
+            font-size: 1em;
+            border-left: 1px solid #444;
             cursor: pointer;
         }
 
         nav li:first-child {
-            border-left: none; /* Az első elem ne legyen elválasztva */
+            border-left: none;
         }
 
         nav a {
@@ -93,7 +107,6 @@
             text-decoration: none;
         }
 
-        /* Alap váz szerkezet legördülő menükhöz */
         .submenu {
             display: none;
             list-style-type: none;
@@ -103,59 +116,85 @@
             border: 1px solid #444;
             position: absolute;
             left: 0;
-            top: 100%; /* A menü közvetlenül a kattintott elem alatt jelenik meg */
-            width: 180px; /* Menüpont szélessége */
+            top: 100%;
+            width: 180px;
             z-index: 1;
         }
 
         .submenu li {
-            padding: 8px 14px; /* Kisebb padding */
+            padding: 8px 14px;
         }
 
         .submenu a {
             color: white;
         }
 
-        /* A legördülő menü viselkedése */
         nav li.active .submenu {
-            display: block; /* Ha az elem aktív, akkor a legördülő menü megjelenik */
+            display: block;
         }
 
-        /* A fő tartalom méretének csökkentése */
-        section {
-            padding: 16px;
+        /* Nyelvválasztás gomb */
+        .language-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background-color: white;
+            border-radius: 50%;
+            background-size: cover;
         }
 
-        section h1 {
-            font-size: 1.5em; /* A fő cím kisebb */
+        /* Gomb stílus */
+        .toggle-button {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: 15px;
+            background-color: white;
+            border: 2px solid #444;
+            background-image: url('light.png');
+            background-size: cover;
         }
 
-        section p {
-            font-size: 0.9em; /* A bekezdések szövege kisebb */
+        .toggle-button.dark {
+            background-image: url('dark.png');
+        }
+
+        /* Világos mód */
+        body.light-mode {
+            background-color: #fff;
+            color: black;
+        }
+
+        body.light-mode .background-container {
+            filter: blur(500px);
+        }
+
+        body.light-mode p {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-    <!-- Videó háttér -->
-    <video class="video-background" autoplay muted loop>
-        <source src="bg_welcome.webm" type="video/mp4">
-        Az Ön böngészője nem támogatja a videókat.
-    </video>
+    <!-- Háttérkép -->
+    <div class="background-container"></div>
 
     <!-- Fejléc -->
     <header>
-        <img src="kor_logo.png" alt="logó">
-        <h1>Ethical Hacking</h1>
-        <h2>Powered by 0xByte</h2>
+        <img src="kor_logo.png" alt="logó"> 
+        <h1 id="header_h1">Ethical Hacking</h1> 
+        <div class="separator"></div> 
+        <h2 id="header_h2">Powered by 0xByte</h2> 
+        <div class="toggle-button" onclick="toggleMode()"></div>
+        <div class="language-toggle" id="language-toggle" onclick="toggleLanguage()"></div>
     </header>
 
-    <!-- Navigációs menü -->
+    <!-- Navigáció -->
     <nav>
         <ul>
             <li><a href="#">Rólam</a></li>
-
-            <!-- Hacker Eszközök legördülő menü -->
             <li onclick="toggleSubmenu(this)">
                 <a href="#">Hacker Eszközök</a>
                 <ul class="submenu">
@@ -166,10 +205,8 @@
                     <li><a href="#">Hashcat</a></li>
                 </ul>
             </li>
-
-            <!-- Tanagyagok legördülő menü -->
             <li onclick="toggleSubmenu(this)">
-                <a href="#">Tanagyagok</a>
+                <a href="#">Tananyagok</a>
                 <ul class="submenu">
                     <li><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
@@ -178,14 +215,12 @@
                     <li><a href="#">5</a></li>
                 </ul>
             </li>
-
-            <!-- Programozási Nyelvek legördülő menü -->
             <li onclick="toggleSubmenu(this)">
                 <a href="#">Programozási Nyelvek</a>
                 <ul class="submenu">
                     <li><a href="#">Python</a></li>
                     <li><a href="#">Java</a></li>
-                    <li><a href="#">Java_Script</a></li>
+                    <li><a href="#">JavaScript</a></li>
                     <li><a href="#">HTML</a></li>
                     <li><a href="#">Ruby</a></li>
                 </ul>
@@ -193,20 +228,21 @@
         </ul>
     </nav>
 
-    <!-- Weboldal tartalom -->
-    <section style="color: white; padding: 20px 130px;">
-        <h1 style="text-align: center;">Etikus hackerré válás útján.</h1>
-        <p> Ezen az oldalon megismerheted az én utamat a kiberbiztonság világában és az etikus hacking területén. </p>
-    </section>
+    <!-- Téma szakasz -->
+    <section><center>
+        <h1 id="section_h1">Etikus hackerré válás útján.</h1>
+        <section style="color: #ffcc00;">
+        <p id="section_p">
+            Az oldal fejlesztés alatt áll
+        </p>
+    </center></section>
 
+    <!-- JavaScript -->
     <script>
-        // JavaScript a legördülő menük kezelésére
         function toggleSubmenu(element) {
-            // Ellenőrzi, hogy a kattintott menü már aktív-e
             if (element.classList.contains('active')) {
-                element.classList.remove('active'); // Ha igen, eltávolítja az aktív osztályt
+                element.classList.remove('active');
             } else {
-                // Ha nem, az összes menüpontot bezárja és csak az aktuális menüpontot nyitja meg
                 var allMenus = document.querySelectorAll('nav li');
                 allMenus.forEach(function(menu) {
                     menu.classList.remove('active');
@@ -214,9 +250,58 @@
                 element.classList.add('active');
             }
         }
-    </script>
 
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+            var button = document.querySelector('.toggle-button');
+            button.classList.toggle('dark');
+        }
+
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang;
+
+            if (currentLang === "hu") {
+                document.documentElement.lang = "en";
+                updateText("en");
+                document.getElementById("language-toggle").style.backgroundImage = "url('hun.png')";
+            } else {
+                document.documentElement.lang = "hu";
+                updateText("hu");
+                document.getElementById("language-toggle").style.backgroundImage = "url('eng.png')";
+            }
+        }
+
+        function updateText(language) {
+            const translations = {
+                "hu": {
+                    "header_h1": "Ethical Hacking",
+                    "header_h2": "Powered by 0xByte",
+                    "section_h1": "Etikus hackerré válás útján.",
+                    "section_p": "<center style='color: #ffcc00;'>Az oldal fejlesztés alatt áll</center>"
+                },
+                "en": {
+                    "header_h1": "Ethical Hacking",
+                    "header_h2": "Powered by 0xByte",
+                    "section_h1": "The Path to Becoming an Ethical Hacker",
+                    "section_p": "<center style='color: #ffcc00;'>This page is under development</center>"
+                }
+            };
+
+            // A szövegek frissítése
+            document.getElementById("header_h1").innerText = translations[language]["header_h1"];
+            document.getElementById("header_h2").innerText = translations[language]["header_h2"];
+            document.getElementById("section_h1").innerText = translations[language]["section_h1"];
+            document.getElementById("section_p").innerHTML = translations[language]["section_p"];
+        }
+
+        (function() {
+            const currentLang = document.documentElement.lang;
+            if (currentLang === "en") {
+                document.getElementById("language-toggle").style.backgroundImage = "url('hun.png')";
+            } else {
+                document.getElementById("language-toggle").style.backgroundImage = "url('eng.png')";
+            }
+        })();
+    </script>
 </body>
 </html>
-
-
